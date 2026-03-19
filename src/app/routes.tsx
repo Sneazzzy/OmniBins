@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createHashRouter } from "react-router";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { DashboardOverview } from "./pages/DashboardOverview";
 import { BinMonitoring } from "./pages/BinMonitoring";
@@ -13,7 +13,7 @@ import { UserManagement } from "./pages/UserManagement";
 import { NotFound } from "./pages/NotFound";
 
 export function createAppRouter(onLogout: () => void) {
-  return createBrowserRouter([
+  return createHashRouter([
     {
       path: "/",
       element: <DashboardLayout onLogout={onLogout} />,
