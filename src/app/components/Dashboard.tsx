@@ -89,7 +89,7 @@ export function Dashboard() {
                 <Trash2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">124</div>
+                <div className="text-4xl font-bold">124</div>
                 <p className="text-xs text-muted-foreground">Across all locations</p>
               </CardContent>
             </Card>
@@ -107,7 +107,7 @@ export function Dashboard() {
                 <AlertCircle className="h-4 w-4 text-red-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">12</div>
+                <div className="text-4xl font-bold">12</div>
                 <p className="text-xs text-muted-foreground">Above 80% capacity</p>
               </CardContent>
             </Card>
@@ -125,7 +125,7 @@ export function Dashboard() {
                 <CheckCircle className="h-4 w-4 text-green-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">18</div>
+                <div className="text-4xl font-bold">18</div>
                 <p className="text-xs text-muted-foreground">+2 from yesterday</p>
               </CardContent>
             </Card>
@@ -143,7 +143,7 @@ export function Dashboard() {
                 <TrendingUp className="h-4 w-4 text-blue-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">94.5%</div>
+                <div className="text-4xl font-bold">94.5%</div>
                 <p className="text-xs text-muted-foreground">+5.2% from last week</p>
               </CardContent>
             </Card>

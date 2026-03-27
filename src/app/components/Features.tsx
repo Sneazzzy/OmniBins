@@ -76,13 +76,13 @@ export function Features() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Card className="h-full border-2 border-gray-300 rounded-2xl p-6 flex flex-col">
-                <div className={`mb-4 rounded-lg ${feature.bgColor} p-3 w-full flex items-center gap-3`}>
+                <div className={`rounded-lg ${feature.bgColor} p-3 w-full flex items-center gap-3`}>
                   <feature.icon className={`h-6 w-6 ${feature.color} flex-shrink-0`} />
-                  <div className="text-black font-semibold text-sm">
+                  <div className="text-black font-semibold text-bg">
                     {feature.title}
                   </div>
                 </div>
-                <CardDescription className="text-sm text-gray-700 leading-relaxed flex-grow">
+                <CardDescription className="text-md text-gray-700 leading-relaxed flex-grow">
                   {feature.description}
                 </CardDescription>
               </Card>
