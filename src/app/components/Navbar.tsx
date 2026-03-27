@@ -10,6 +10,7 @@ interface NavbarProps {
 export function Navbar({ onLoginSuccess }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleLoginSuccess = () => {
     setIsLoginOpen(false);
@@ -18,6 +19,11 @@ export function Navbar({ onLoginSuccess }: NavbarProps) {
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleContactClick = () => {
+    setIsOpen(false);
+    setIsContactOpen(true);
   };
 
   return (
@@ -46,7 +52,7 @@ export function Navbar({ onLoginSuccess }: NavbarProps) {
               <a href="#benefits" className="text-gray-700 hover:text-green-600 transition-colors">
                 Benefits
               </a>
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
+              <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={handleContactClick}>
                 Contact Us
               </Button>
               <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => setIsLoginOpen(true)}>
@@ -96,7 +102,7 @@ export function Navbar({ onLoginSuccess }: NavbarProps) {
               >
                 Benefits
               </a>
-              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white" onClick={handleContactClick}>
                 Contact Us
               </Button>
               <Button className="w-full bg-green-600 hover:bg-green-700 text-white" onClick={() => setIsLoginOpen(true)}>

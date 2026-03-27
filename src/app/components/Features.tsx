@@ -76,16 +76,15 @@ export function Features() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <Card className="h-full border-2 border-gray-300 rounded-2xl p-6 flex flex-col">
-                <div className={`mb-4 inline-flex rounded-lg ${feature.bgColor} p-3 w-full`}>
-                  <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                <div className={`mb-4 rounded-lg ${feature.bgColor} p-3 w-full flex items-center gap-3`}>
+                  <feature.icon className={`h-6 w-6 ${feature.color} flex-shrink-0`} />
+                  <div className="text-black font-semibold text-sm">
+                    {feature.title}
+                  </div>
                 </div>
-                <CardTitle className="text-lg font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </CardTitle>
                 <CardDescription className="text-sm text-gray-700 leading-relaxed flex-grow">
                   {feature.description}
                 </CardDescription>
-                <div className="mt-6"></div>
               </Card>
             </motion.div>
           ))}
