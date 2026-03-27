@@ -1,6 +1,4 @@
 # OmniBins
-Capstone
-
   The OmniBins system transforms traditional receptacles into intelligent infrastructure with the following features:
 Load-Sensing for Optimization: High-capacity load cells are used for real-time weight tracking, providing superior accuracy for predicting bin fill levels and optimizing collection routes. This prevents over-weight containers, promoting worker safety and minimizing logistical waste.
 Odor-Triggered Neutralization: A gas-sensing array (MQ-135 and MQ-4 sensors) detects the chemical signatures of decaying waste to calculate a "Rot Index". When hazardous gas thresholds are reached, the system automatically dispenses a neutralizing mist and initiates a filtration process to suppress odors and disinfect the area between collections.
