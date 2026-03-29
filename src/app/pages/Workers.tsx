@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { motion, AnimatePresence } from 'motion/react';
+import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { User, Phone, Mail, CheckCircle, Clock, Search } from 'lucide-react';
+import { User, Phone, Mail, CheckCircle, Clock, Search, X } from 'lucide-react';
 
-const workers = [
+const workersData = [
   { id: 1, name: 'Juan Dela Cruz', team: 'Team A', phone: '0917-123-4567', email: 'juan@omnibins.com', tasksToday: 5, tasksCompleted: 3, status: 'active' },
   { id: 2, name: 'Maria Santos', team: 'Team A', phone: '0918-234-5678', email: 'maria@omnibins.com', tasksToday: 4, tasksCompleted: 4, status: 'active' },
   { id: 3, name: 'Pedro Reyes', team: 'Team B', phone: '0919-345-6789', email: 'pedro@omnibins.com', tasksToday: 6, tasksCompleted: 2, status: 'active' },
@@ -13,8 +14,8 @@ const workers = [
   { id: 5, name: 'Jose Ramos', team: 'Team C', phone: '0921-567-8901', email: 'jose@omnibins.com', tasksToday: 0, tasksCompleted: 0, status: 'off-duty' },
 ];
 
-export function WorkerManagement() {
-  const [workerList, setWorkerList] = useState(workers);
+export function Workers() {
+  const [workerList] = useState(workersData);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredWorkers = workerList.filter(worker =>
@@ -26,16 +27,30 @@ export function WorkerManagement() {
   const totalTasks = workerList.reduce((sum, w) => sum + w.tasksCompleted, 0);
 
   return (
+
+    
     <div className="space-y-6">
+
+      
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Worker Management</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Workers</h2>
           <p className="text-gray-900 font-semibold">Manage sanitation workers and collection teams</p>
+          
         </div>
-        <Button className="bg-green-600 hover:bg-green-700 text-white">
-          Add New Worker
-        </Button>
+        <div className="flex justify-end ">
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-700" />
+        <Input
+          placeholder="Search Workers..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-9 text-gray-900 font-medium sm:w-55"
+        />
       </div>
+      </div>
+      </div>
+      
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <Card>
@@ -72,16 +87,7 @@ export function WorkerManagement() {
           </CardContent>
         </Card>
       </div>
-
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-700" />
-        <Input
-          placeholder="Search workers..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-9 text-gray-900 font-medium"
-        />
-      </div>
+      
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {filteredWorkers.map((worker) => (

@@ -1,10 +1,20 @@
+// ============================================================================
+// ALERTS - Monitor and manage system alerts and notifications
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { AlertCircle, Bell, CheckCircle, XCircle, Wind, Weight } from 'lucide-react';
+import { AlertCircle, Bell, CheckCircle, XCircle, Wind, Weight, X } from 'lucide-react';
 
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 const alerts = [
   { id: 1, bin: 'BIN-001', type: 'overweight', message: 'Bin capacity at 95% - immediate collection required', time: '2 mins ago', severity: 'critical', read: false },
   { id: 2, bin: 'BIN-003', type: 'gas', message: 'High ammonia level detected (45 ppm)', time: '15 mins ago', severity: 'warning', read: false },
@@ -16,9 +26,14 @@ const alerts = [
   { id: 8, bin: 'BIN-015', type: 'overweight', message: 'Bin near full (82%)', time: '5 hours ago', severity: 'warning', read: true },
 ];
 
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function Alerts() {
   const [alertList, setAlertList] = useState(alerts);
   const [filter, setFilter] = useState<string>('all');
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [alertToConfirm, setAlertToConfirm] = useState<any>(null);
 
   const getSeverityBadge = (severity: string) => {
     switch (severity) {
@@ -75,6 +90,31 @@ export function Alerts() {
   const dismissAlert = (id: number) => {
     setAlertList(prev => prev.filter(alert => alert.id !== id));
   };
+
+  const ConfirmationModal = ({ isOpen, onClose, onConfirm, alert }: { isOpen: boolean; onClose: () => void; onConfirm: () => void; alert?: any }) => (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-50 bg-white/30 backdrop-blur-sm" />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6" onClick={(e) => e.stopPropagation()}>
+              <button onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"><X className="h-6 w-6" /></button>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Dismiss Alert</h2>
+              <p className="text-gray-700 mb-2">Are you sure you want to dismiss this alert?</p>
+              <div className="bg-gray-50 p-3 rounded-lg mb-6">
+                <p className="font-semibold text-gray-900 text-sm">{alert?.bin}</p>
+                <p className="text-sm text-gray-700 mt-1">{alert?.message}</p>
+              </div>
+              <div className="flex gap-3">
+                <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
+                <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white">Dismiss</Button>
+              </div>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
+  );
 
   const filteredAlerts = alertList.filter(alert => {
     if (filter === 'unread') return !alert.read;
@@ -158,7 +198,10 @@ export function Alerts() {
                         )}
                         <Button
                           size="sm"
-                          onClick={() => dismissAlert(alert.id)}
+                          onClick={() => {
+                            setAlertToConfirm(alert);
+                            setIsConfirmOpen(true);
+                          }}
                           className="bg-red-600 hover:bg-red-700 text-white"
                         >
                           <XCircle className="h-3 w-3 mr-1" />
@@ -182,6 +225,17 @@ export function Alerts() {
           </CardContent>
         </Card>
       )}
+
+      <ConfirmationModal 
+        isOpen={isConfirmOpen} 
+        onClose={() => setIsConfirmOpen(false)} 
+        onConfirm={() => {
+          dismissAlert(alertToConfirm?.id);
+          setIsConfirmOpen(false);
+          setAlertToConfirm(null);
+        }}
+        alert={alertToConfirm}
+      />
     </div>
   );
 }

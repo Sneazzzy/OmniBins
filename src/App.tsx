@@ -2,15 +2,8 @@
 import { useState, useMemo } from 'react';
 import { RouterProvider } from 'react-router';
 
-// Update these to include the "app" folder!
 import { createAppRouter } from './app/routes'; 
-import { Navbar } from './app/components/Navbar';
-import { Hero } from './app/components/Hero';
-import { Features } from './app/components/Features';
-import { Dashboard } from './app/components/Dashboard';
-import { HowItWorks } from './app/components/HowItWorks';
-import { Benefits } from './app/components/Benefits';
-import { Footer } from './app/components/Footer';
+import { LandingPage } from './app/pages/LandingPage';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,23 +18,5 @@ export default function App() {
   }
 
   // Otherwise, show the landing page
-  return (
-    <div className="min-h-screen">
-      <Navbar onLoginSuccess={handleLoginSuccess} />
-      <Hero onLoginSuccess={handleLoginSuccess} />
-      <div id="features">
-        <Features />
-      </div>
-      <div id="dashboard">
-        <Dashboard />
-      </div>
-      <div id="how-it-works">
-        <HowItWorks />
-      </div>
-      <div id="benefits">
-        <Benefits />
-      </div>
-      <Footer />
-    </div>
-  );
+  return <LandingPage onLoginSuccess={handleLoginSuccess} />;
 }

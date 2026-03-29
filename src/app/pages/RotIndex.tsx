@@ -1,7 +1,17 @@
+// ============================================================================
+// ROT INDEX - Monitor decomposition and gas production metrics
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { Wind, AlertTriangle } from 'lucide-react';
 
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 const historicalData = [
   { time: '00:00', nh3: 15, ch4: 22, rotIndex: 3.2 },
   { time: '04:00', nh3: 18, ch4: 25, rotIndex: 3.8 },
@@ -19,6 +29,9 @@ const binRotData = [
   { bin: 'BIN-006', rotIndex: 5.2, nh3: 25, ch4: 28 },
 ];
 
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function RotIndex() {
   return (
     <div className="space-y-6">

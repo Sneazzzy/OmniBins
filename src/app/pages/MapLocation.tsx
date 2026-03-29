@@ -1,9 +1,19 @@
+// ============================================================================
+// MAP LOCATION - View and track bin locations on map
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { MapPin, Navigation, Clock } from 'lucide-react';
 
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 const bins = [
   { id: 'BIN-001', location: 'Main Street Plaza', lat: 14.5995, lng: 120.9842, status: 'full', capacity: 92, lastCollection: '2 days ago' },
   { id: 'BIN-002', location: 'Park Avenue', lat: 14.6001, lng: 120.9838, status: 'normal', capacity: 48, lastCollection: '1 day ago' },
@@ -13,6 +23,9 @@ const bins = [
   { id: 'BIN-006', location: 'City Hall', lat: 14.5978, lng: 120.9855, status: 'normal', capacity: 71, lastCollection: '12 hours ago' },
 ];
 
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function MapLocation() {
   const [selectedBin, setSelectedBin] = useState<typeof bins[0] | null>(null);
 

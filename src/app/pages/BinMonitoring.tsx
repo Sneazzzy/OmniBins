@@ -1,11 +1,22 @@
+// ============================================================================
+// BIN MONITORING - Real-time monitoring of smart waste bins
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
 import { Input } from '../components/ui/input';
-import { Search, MapPin, Weight, Wind } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Search, MapPin, Weight, Wind, X } from 'lucide-react';
 
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 const initialBins = [
   { id: 'BIN-001', location: 'Main Street Plaza', weight: 45.2, capacity: 92, nh3: 38, ch4: 42, status: 'Full' },
   { id: 'BIN-002', location: 'Park Avenue', weight: 22.5, capacity: 48, nh3: 15, ch4: 18, status: 'Normal' },
@@ -18,10 +29,190 @@ const initialBins = [
   { id: 'BIN-009', location: 'Downtown Station', weight: 2.1, capacity: 4, nh3: 1, ch4: 2, status: 'Empty' },
 ];
 
+// ============================================================================
+// MODAL COMPONENTS
+// ============================================================================
+const AddBinModal = ({ isOpen, onClose, onAddBin }: { isOpen: boolean; onClose: () => void; onAddBin: (bin: any) => void }) => {
+  const [binId, setBinId] = useState('');
+  const [location, setLocation] = useState('');
+  const [team, setTeam] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!binId || !location) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
+    const newBin = {
+      id: binId,
+      location,
+      weight: 0,
+      capacity: 0,
+      nh3: 0,
+      ch4: 0,
+      status: 'Normal',
+    };
+    
+    onAddBin(newBin);
+    alert(`Bin ${binId} added successfully at ${location}`);
+    setBinId('');
+    setLocation('');
+    setTeam('');
+    onClose();
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-white/30 backdrop-blur-sm z-40"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl shadow-2xl p-6 z-50 w-full max-w-md"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900">Add New Bin</h3>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-900 mb-1">
+                  Bin ID
+                </label>
+                <Input
+                  placeholder="e.g., BIN-010"
+                  value={binId}
+                  onChange={(e) => setBinId(e.target.value)}
+                  className="text-gray-900"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-900 mb-1">
+                  Location
+                </label>
+                <Input
+                  placeholder="e.g., Main Street Plaza"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="text-gray-900"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-900 mb-1">
+                  Assigned Team
+                </label>
+                <Input
+                  placeholder="e.g., Team A"
+                  value={team}
+                  onChange={(e) => setTeam(e.target.value)}
+                  className="text-gray-900"
+                />
+              </div>
+
+              <div className="flex gap-2 pt-4">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex-1 px-4 py-2 text-gray-900 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-medium"
+                >
+                  Add Bin
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
+function ConfirmationModal({ isOpen, onClose, onConfirm, title, message }: { isOpen: boolean; onClose: () => void; onConfirm: () => void; title: string; message: string }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-white/30 backdrop-blur-sm z-40"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl shadow-2xl p-6 z-50 w-full max-w-md"
+          >
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+            <p className="text-gray-700 mb-6">{message}</p>
+            <div className="flex gap-3">
+              <Button type="button" variant="outline" onClick={onClose} className="flex-1 text-sm">
+                Cancel
+              </Button>
+              <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm">
+                Confirm
+              </Button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function BinMonitoring() {
   const [bins, setBins] = useState(initialBins);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [confirmAction, setConfirmAction] = useState<{ title: string; message: string; onConfirm: () => void } | null>(null);
+
+  const handleAddBin = (newBin: any) => {
+    setBins([...bins, newBin]);
+  };
+
+  const handleRemoveBin = (binId: string) => {
+    setConfirmAction({
+      title: 'Remove Bin',
+      message: `Are you sure you want to remove bin ${binId}? This action cannot be undone.`,
+      onConfirm: () => {
+        setBins(bins.filter(b => b.id !== binId));
+        setIsConfirmOpen(false);
+        alert(`Bin ${binId} has been removed`);
+      }
+    });
+    setIsConfirmOpen(true);
+  };
 
   useEffect(() => {
     // Simulate real-time updates
@@ -69,17 +260,17 @@ export function BinMonitoring() {
           <h2 className="text-2xl font-bold text-gray-900">Smart Bin Monitoring</h2>
           <p className="text-gray-900 font-semibold">Real-time monitoring of all smart bins</p>
         </div>
-        <div className="flex gap-2">
+
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-700" />
             <Input
-              placeholder="Search bins..."
+              placeholder="Search Bins..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 w-full sm:w-64 text-gray-900 font-medium"
+              className="pl-9 text-gray-900 font-medium text-sm w-full sm:w-55"
             />
           </div>
-        </div>
+        
       </div>
 
       {/* Filter buttons */}
@@ -162,6 +353,7 @@ export function BinMonitoring() {
           </motion.div>
         ))}
       </div>
+
     </div>
   );
 }

@@ -1,69 +1,63 @@
+// ============================================================================
+// COLLECTIONS - Manage waste collection tasks and assignments
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Truck, MapPin, Clock, User, CheckCircle, AlertCircle } from 'lucide-react';
 
-const collections = [
-  { id: 1, bin: 'BIN-001', location: 'Main Street Plaza', priority: 'high', status: 'pending', assignedTo: null, capacity: 95, scheduledTime: 'ASAP' },
-  { id: 2, bin: 'BIN-003', location: 'Central Plaza', priority: 'high', status: 'in-progress', assignedTo: 'Team A', capacity: 85, scheduledTime: '10:00 AM' },
-  { id: 3, bin: 'BIN-007', location: 'University Campus', priority: 'high', status: 'pending', assignedTo: null, capacity: 97, scheduledTime: 'ASAP' },
-  { id: 4, bin: 'BIN-005', location: 'Shopping District', priority: 'medium', status: 'pending', assignedTo: null, capacity: 78, scheduledTime: '2:00 PM' },
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
+const collectionsData = [
+  { id: 1, bin: 'BIN-001', location: 'Main Street Plaza', priority: 'high', status: 'pending', assignedTo: null as string | null, capacity: 95, scheduledTime: 'ASAP', completedAt: undefined as string | undefined },
+  { id: 2, bin: 'BIN-003', location: 'Central Plaza', priority: 'high', status: 'in-progress', assignedTo: 'Team A', capacity: 85, scheduledTime: '10:00 AM', completedAt: undefined },
+  { id: 3, bin: 'BIN-007', location: 'University Campus', priority: 'high', status: 'pending', assignedTo: null as string | null, capacity: 97, scheduledTime: 'ASAP', completedAt: undefined },
+  { id: 4, bin: 'BIN-005', location: 'Shopping District', priority: 'medium', status: 'pending', assignedTo: null as string | null, capacity: 78, scheduledTime: '2:00 PM', completedAt: undefined },
   { id: 5, bin: 'BIN-008', location: 'Market Square', priority: 'low', status: 'completed', assignedTo: 'Team B', capacity: 68, scheduledTime: '8:00 AM', completedAt: '8:45 AM' },
   { id: 6, bin: 'BIN-002', location: 'Park Avenue', priority: 'low', status: 'completed', assignedTo: 'Team A', capacity: 48, scheduledTime: '9:00 AM', completedAt: '9:30 AM' },
 ];
 
 const teams = ['Team A', 'Team B', 'Team C'];
 
-export function CollectionManagement() {
-  const [taskList, setTaskList] = useState(collections);
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+export function Collections() {
+  const [taskList, setTaskList] = useState(collectionsData);
   const [filter, setFilter] = useState<string>('all');
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'pending':
-        return <Badge className="bg-yellow-500 text-white">Pending</Badge>;
-      case 'in-progress':
-        return <Badge className="bg-blue-500 text-white">In Progress</Badge>;
-      case 'completed':
-        return <Badge className="bg-green-500 text-white">Completed</Badge>;
-      default:
-        return <Badge>Unknown</Badge>;
+      case 'pending': return <Badge className="bg-yellow-500 text-white">Pending</Badge>;
+      case 'in-progress': return <Badge className="bg-blue-500 text-white">In Progress</Badge>;
+      case 'completed': return <Badge className="bg-green-500 text-white">Completed</Badge>;
+      default: return <Badge>Unknown</Badge>;
     }
   };
 
   const getPriorityBadge = (priority: string) => {
     switch (priority) {
-      case 'high':
-        return <Badge variant="destructive">High</Badge>;
-      case 'medium':
-        return <Badge className="bg-yellow-500 text-white">Medium</Badge>;
-      default:
-        return <Badge className="bg-gray-500 text-white">Low</Badge>;
+      case 'high': return <Badge variant="destructive">High</Badge>;
+      case 'medium': return <Badge className="bg-yellow-500 text-white">Medium</Badge>;
+      default: return <Badge className="bg-gray-500 text-white">Low</Badge>;
     }
   };
 
   const assignTeam = (taskId: number, team: string) => {
-    setTaskList(prev =>
-      prev.map(task =>
-        task.id === taskId
-          ? { ...task, assignedTo: team, status: 'in-progress' }
-          : task
-      )
-    );
+    setTaskList(prev => prev.map(task => task.id === taskId ? { ...task, assignedTo: team, status: 'in-progress' as const } : task));
   };
 
   const completeTask = (taskId: number) => {
     const now = new Date();
     const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    setTaskList(prev =>
-      prev.map(task =>
-        task.id === taskId
-          ? { ...task, status: 'completed', completedAt: timeString }
-          : task
-      )
-    );
+    setTaskList(prev => prev.map(task => task.id === taskId ? { ...task, status: 'completed' as const, completedAt: timeString } : task));
   };
 
   const filteredTasks = taskList.filter(task => {
@@ -80,48 +74,30 @@ export function CollectionManagement() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">Collection Management</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Collections</h2>
         <p className="text-gray-900 font-semibold">Manage waste collection tasks and assign teams</p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-900 font-semibold">Pending</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
+        {[
+          { label: 'Pending', value: stats.pending, icon: AlertCircle, color: 'text-yellow-500' },
+          { label: 'In Progress', value: stats.inProgress, icon: Truck, color: 'text-blue-500' },
+          { label: 'Completed', value: stats.completed, icon: CheckCircle, color: 'text-green-500' },
+        ].map((stat) => (
+          <Card key={stat.label}>
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-900 font-semibold">{stat.label}</p>
+                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                </div>
+                <stat.icon className={`h-8 w-8 ${stat.color}`} />
               </div>
-              <AlertCircle className="h-8 w-8 text-yellow-500" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">In Progress</p>
-                <p className="text-2xl font-bold">{stats.inProgress}</p>
-              </div>
-              <Truck className="h-8 w-8 text-blue-500" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Completed</p>
-                <p className="text-2xl font-bold">{stats.completed}</p>
-              </div>
-              <CheckCircle className="h-8 w-8 text-green-500" />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      {/* Filter buttons */}
       <div className="flex flex-wrap gap-2">
         {[
           { value: 'all', label: 'All Tasks' },
@@ -129,29 +105,15 @@ export function CollectionManagement() {
           { value: 'in-progress', label: 'In Progress' },
           { value: 'completed', label: 'Completed' },
         ].map((option) => (
-          <button
-            key={option.value}
-            onClick={() => setFilter(option.value)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              filter === option.value
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-50 text-gray-700 border hover:bg-gray-100'
-            }`}
-          >
+          <button key={option.value} onClick={() => setFilter(option.value)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === option.value ? 'bg-green-600 text-white' : 'bg-gray-50 text-gray-700 border hover:bg-gray-100'}`}>
             {option.label}
           </button>
         ))}
       </div>
 
-      {/* Tasks list */}
       <div className="space-y-3">
         {filteredTasks.map((task, index) => (
-          <motion.div
-            key={task.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-          >
+          <motion.div key={task.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.05 }}>
             <Card>
               <CardContent className="p-4">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -193,27 +155,14 @@ export function CollectionManagement() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    {task.status === 'pending' && (
-                      <div className="flex gap-2">
-                        {teams.map(team => (
-                          <Button
-                            key={team}
-                            size="sm"
-                            onClick={() => assignTeam(task.id, team)}
-                            className="bg-green-600 hover:bg-green-700 text-white"
-                          >
-                            <Truck className="h-4 w-4 mr-2" />
-                            {team}
-                          </Button>
-                        ))}
-                      </div>
-                    )}
+                    {task.status === 'pending' && teams.map(team => (
+                      <Button key={team} size="sm" onClick={() => assignTeam(task.id, team)} className="bg-green-600 hover:bg-green-700 text-white">
+                        <Truck className="h-4 w-4 mr-2" />
+                        {team}
+                      </Button>
+                    ))}
                     {task.status === 'in-progress' && (
-                      <Button
-                        size="sm"
-                        onClick={() => completeTask(task.id)}
-                        className="bg-green-600 hover:bg-green-700 text-white"
-                      >
+                      <Button size="sm" onClick={() => completeTask(task.id)} className="bg-green-600 hover:bg-green-700 text-white">
                         <CheckCircle className="h-4 w-4 mr-2" />
                         Mark Complete
                       </Button>

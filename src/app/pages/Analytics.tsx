@@ -1,7 +1,17 @@
+// ============================================================================
+// ANALYTICS - Analyze waste management trends and statistics
+// ============================================================================
+
+// ============================================================================
+// IMPORTS
+// ============================================================================
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, Clock, MapPin, Droplet } from 'lucide-react';
 
+// ============================================================================
+// DATA & CONSTANTS
+// ============================================================================
 const weeklyTrend = [
   { week: 'Week 1', collections: 85, weight: 3200 },
   { week: 'Week 2', collections: 92, weight: 3450 },
@@ -33,6 +43,9 @@ const responseTime = [
 
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444'];
 
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
 export function Analytics() {
   return (
     <div className="space-y-6">
@@ -128,7 +141,7 @@ export function Analytics() {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {responseTime.map((entry, index) => (
+                  {responseTime.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>

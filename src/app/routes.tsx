@@ -1,31 +1,31 @@
-import { createHashRouter } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { DashboardLayout } from "./layouts/DashboardLayout";
-import { DashboardOverview } from "./pages/DashboardOverview";
+import { Dashboard } from "./pages/Dashboard";
 import { BinMonitoring } from "./pages/BinMonitoring";
 import { MapLocation } from "./pages/MapLocation";
 import { Alerts } from "./pages/Alerts";
-import { CollectionManagement } from "./pages/CollectionManagement";
+import { Collections } from "./pages/Collections";
 import { RotIndex } from "./pages/RotIndex";
 import { Analytics } from "./pages/Analytics";
-import { WorkerManagement } from "./pages/WorkerManagement";
+import { Workers } from "./pages/Workers";
 import { Maintenance } from "./pages/Maintenance";
 import { UserManagement } from "./pages/UserManagement";
 import { NotFound } from "./pages/NotFound";
 
 export function createAppRouter(onLogout: () => void) {
-  return createHashRouter([
+  return createBrowserRouter([
     {
       path: "/",
       element: <DashboardLayout onLogout={onLogout} />,
       children: [
-        { index: true, Component: DashboardOverview },
+        { index: true, Component: Dashboard },
         { path: "bins", Component: BinMonitoring },
         { path: "map", Component: MapLocation },
         { path: "alerts", Component: Alerts },
-        { path: "collections", Component: CollectionManagement },
+        { path: "collections", Component: Collections },
         { path: "rot-index", Component: RotIndex },
         { path: "analytics", Component: Analytics },
-        { path: "workers", Component: WorkerManagement },
+        { path: "workers", Component: Workers },
         { path: "maintenance", Component: Maintenance },
         { path: "users", Component: UserManagement },
         { path: "*", Component: NotFound },
