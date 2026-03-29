@@ -31,5 +31,5 @@ export function createAppRouter(onLogout: () => void) {
         { path: "*", Component: NotFound },
       ],
     },
-  ]);
+  ], { basename: import.meta.env.BASE_URL });
 }
