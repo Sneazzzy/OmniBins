@@ -59,9 +59,9 @@ export function Analytics() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-900 font-semibold">Total Collections</p>
-                <p className="text-2xl font-bold text-gray-900">360</p>
-                <p className="text-xs text-green-500 font-semibold mt-1">+12% vs last month</p>
+                <p className="text-base text-gray-900 font-semibold">Total Collections</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">1,432</p>
+                <p className="text-sm text-green-500 font-semibold mt-1">+12% vs last month</p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-500" />
             </div>
@@ -71,9 +71,9 @@ export function Analytics() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-900 font-semibold">Avg Response Time</p>
-                <p className="text-2xl font-bold text-gray-900">42 min</p>
-                <p className="text-xs text-blue-500 font-semibold mt-1">-8 min improvement</p>
+                <p className="text-base text-gray-900 font-semibold">Avg Response Time</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">24 min</p>
+                <p className="text-sm text-blue-500 font-semibold mt-1">-8 min improvement</p>
               </div>
               <Clock className="h-8 w-8 text-blue-500" />
             </div>
@@ -83,9 +83,9 @@ export function Analytics() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-900 font-semibold">High Risk Areas</p>
-                <p className="text-2xl font-bold text-gray-900">3</p>
-                <p className="text-xs text-orange-500 font-semibold mt-1">Require attention</p>
+                <p className="text-base text-gray-900 font-semibold">High Risk Areas</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">8</p>
+                <p className="text-sm text-orange-500 font-semibold mt-1">Require attention</p>
               </div>
               <MapPin className="h-8 w-8 text-orange-500" />
             </div>
@@ -95,9 +95,9 @@ export function Analytics() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-900 font-semibold">Neutralization Usage</p>
-                <p className="text-2xl font-bold text-gray-900">156</p>
-                <p className="text-xs text-cyan-500 font-semibold mt-1">Activations this month</p>
+                <p className="text-base text-gray-900 font-semibold">Neutralization Usage</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">342</p>
+                <p className="text-sm text-cyan-500 font-semibold mt-1">Activations this month</p>
               </div>
               <Droplet className="h-8 w-8 text-cyan-500" />
             </div>

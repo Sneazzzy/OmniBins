@@ -252,16 +252,16 @@ export function Dashboard() {
         {/* Stats Overview */}
         <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { title: 'Total Bins', value: '124', desc: 'Across all locations', icon: Trash2 },
-            { title: 'Needs Collection', value: '12', desc: 'Above 80% capacity', icon: AlertCircle, iconColor: 'text-red-500' },
-            { title: 'Collections Today', value: '18', desc: '+2 from yesterday', icon: CheckCircle, iconColor: 'text-green-500' },
-            { title: 'Efficiency', value: '94.5%', desc: '+5.2% from last week', icon: TrendingUp, iconColor: 'text-blue-500' },
+            { title: 'Total Bins', value: '124', desc: 'Across all locations', icon: Trash2, iconColor: 'text-green-600' },
+            { title: 'Needs Collection', value: '12', desc: 'Above 80% capacity', icon: AlertCircle, iconColor: 'text-red-600' },
+            { title: 'Collections Today', value: '18', desc: '+2 from yesterday', icon: CheckCircle, iconColor: 'text-emerald-600' },
+            { title: 'Efficiency', value: '94.5%', desc: '+5.2% from last week', icon: TrendingUp, iconColor: 'text-cyan-600' },
           ].map((stat, idx) => (
             <motion.div key={stat.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.1 }}>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                  <stat.icon className="h-4 w-4 text-muted-foreground" />
+                  <stat.icon className={`h-10 w-10 ${stat.iconColor || 'text-gray-800'}`} />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{stat.value}</div>

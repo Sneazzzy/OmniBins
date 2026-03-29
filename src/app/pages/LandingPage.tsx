@@ -59,20 +59,20 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginModalProps) {
               </div>
               <form onSubmit={handleSubmit} className="px-8 py-8 space-y-6">
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                  <label htmlFor="email" className="block text-base font-medium text-gray-700">Email</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" className="pl-10" required />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                  <label htmlFor="password" className="block text-base font-medium text-gray-700">Password</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="pl-10" required />
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-base">
                   <label className="flex items-center gap-2">
                     <input type="checkbox" className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-600" />
                     <span className="text-gray-600">Remember me</span>
@@ -184,7 +184,7 @@ function HeroSection({ onLoginClick }: { onLoginClick: () => void }) {
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
+                  <div className="text-base text-gray-600">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -225,7 +225,7 @@ function FeaturesSection() {
                   <feature.icon className={`h-6 w-6 ${feature.color} flex-shrink-0`} />
                   <h3 className="text-lg font-semibold text-black">{feature.title}</h3>
                 </div>
-                <CardDescription className="text-sm text-gray-700 leading-relaxed flex-grow">{feature.description}</CardDescription>
+                <CardDescription className="text-base text-gray-700 leading-relaxed flex-grow">{feature.description}</CardDescription>
               </Card>
             </motion.div>
           ))}
@@ -294,16 +294,16 @@ function DashboardPreviewSection() {
 
         <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { title: 'Total Bins', value: '124', desc: 'Across all locations', icon: Trash2 },
-            { title: 'Needs Collection', value: '12', desc: 'Above 80% capacity', icon: AlertCircle, iconColor: 'text-red-500' },
-            { title: 'Collections Today', value: '18', desc: '+2 from yesterday', icon: CheckCircle, iconColor: 'text-green-500' },
-            { title: 'Efficiency', value: '94.5%', desc: '+5.2% from last week', icon: TrendingUp, iconColor: 'text-blue-500' },
+            { title: 'Total Bins', value: '124', desc: 'Across all locations', icon: Trash2, iconColor: 'text-green-600' },
+            { title: 'Needs Collection', value: '12', desc: 'Above 80% capacity', icon: AlertCircle, iconColor: 'text-red-600' },
+            { title: 'Collections Today', value: '18', desc: '+2 from yesterday', icon: CheckCircle, iconColor: 'text-emerald-600' },
+            { title: 'Efficiency', value: '94.5%', desc: '+5.2% from last week', icon: TrendingUp, iconColor: 'text-cyan-600' },
           ].map((stat, idx) => (
             <motion.div key={stat.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.1 }}>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                  <stat.icon className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-base font-medium">{stat.title}</CardTitle>
+                  <stat.icon className={`h-10 w-10 ${stat.iconColor || 'text-gray-800'}`} />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{stat.value}</div>

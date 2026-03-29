@@ -77,7 +77,7 @@ export function Dashboard() {
       {/* Stats Overview */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { title: 'Total Smart Bins', value: stats.totalBins, desc: 'Deployed across the area', icon: Trash2 },
+          { title: 'Total Smart Bins', value: stats.totalBins, desc: 'Deployed across the area', icon: Trash2, iconColor: 'text-green-600' },
           { title: 'Full / Near Full', value: stats.fullBins, desc: 'Require immediate collection', icon: AlertCircle, iconColor: 'text-red-600' },
           { title: 'High Rot Index', value: stats.highRotIndex, desc: 'Above threshold level', icon: Wind, iconColor: 'text-orange-600' },
           { title: 'Active Neutralization', value: stats.activeNeutralization, desc: 'Odor control events', icon: Droplet, iconColor: 'text-blue-600' },
@@ -86,7 +86,7 @@ export function Dashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-semibold text-gray-900">{stat.title}</CardTitle>
-                <stat.icon className={`h-4 w-4 ${stat.iconColor || 'text-gray-800'}`} />
+                <stat.icon className={`h-10 w-10 ${stat.iconColor || 'text-gray-800'}`} />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>

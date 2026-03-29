@@ -102,8 +102,8 @@ export function Alerts() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Dismiss Alert</h2>
               <p className="text-gray-700 mb-2">Are you sure you want to dismiss this alert?</p>
               <div className="bg-gray-50 p-3 rounded-lg mb-6">
-                <p className="font-semibold text-gray-900 text-sm">{alert?.bin}</p>
-                <p className="text-sm text-gray-700 mt-1">{alert?.message}</p>
+                <p className="font-semibold text-gray-900 text-base">{alert?.bin}</p>
+                <p className="text-base text-gray-700 mt-1">{alert?.message}</p>
               </div>
               <div className="flex gap-3">
                 <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
@@ -133,7 +133,7 @@ export function Alerts() {
         </div>
         <div className="flex items-center gap-2">
           <Bell className="h-5 w-5 text-gray-800" />
-          <span className="text-sm font-semibold text-gray-900">{unreadCount} unread</span>
+          <span className="text-base font-semibold text-gray-900">{unreadCount} unread</span>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export function Alerts() {
           <button
             key={option.value}
             onClick={() => setFilter(option.value)}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+            className={`px-4 py-2 rounded-lg text-base font-semibold transition-colors ${
               filter === option.value
                 ? 'bg-green-600 text-white'
                 : 'bg-gray-50 text-gray-900 border border-gray-800 hover:bg-gray-100'

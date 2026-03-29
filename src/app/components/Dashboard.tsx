@@ -67,10 +67,10 @@ export function Dashboard() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             Live Monitoring Dashboard
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-xl text-gray-600">
             Real-time insights into your waste management operations
           </p>
         </motion.div>
@@ -85,12 +85,12 @@ export function Dashboard() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Bins</CardTitle>
-                <Trash2 className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-base font-medium">Total Bins</CardTitle>
+                <Trash2 className="h-14 w-14 text-green-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">124</div>
-                <p className="text-xs text-muted-foreground">Across all locations</p>
+                <div className="text-3xl font-bold">124</div>
+                <p className="text-sm text-muted-foreground">Across all locations</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -103,12 +103,12 @@ export function Dashboard() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Needs Collection</CardTitle>
-                <AlertCircle className="h-4 w-4 text-red-500" />
+                <CardTitle className="text-base font-medium">Needs Collection</CardTitle>
+                <AlertCircle className="h-14 w-14 text-orange-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">12</div>
-                <p className="text-xs text-muted-foreground">Above 80% capacity</p>
+                <div className="text-3xl font-bold">12</div>
+                <p className="text-sm text-muted-foreground">Above 80% capacity</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -121,12 +121,12 @@ export function Dashboard() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Collections Today</CardTitle>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+                <CardTitle className="text-base font-medium">Collections Today</CardTitle>
+                <CheckCircle className="h-14 w-14 text-emerald-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">18</div>
-                <p className="text-xs text-muted-foreground">+2 from yesterday</p>
+                <div className="text-3xl font-bold">18</div>
+                <p className="text-sm text-muted-foreground">+2 from yesterday</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -139,12 +139,12 @@ export function Dashboard() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Efficiency</CardTitle>
-                <TrendingUp className="h-4 w-4 text-blue-500" />
+                <CardTitle className="text-base font-medium">Efficiency</CardTitle>
+                <TrendingUp className="h-14 w-14 text-cyan-500" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">94.5%</div>
-                <p className="text-xs text-muted-foreground">+5.2% from last week</p>
+                <div className="text-3xl font-bold">94.5%</div>
+                <p className="text-sm text-muted-foreground">+5.2% from last week</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -173,23 +173,23 @@ export function Dashboard() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-4 rounded-lg border p-4"
                   >
-                    <div className={`h-3 w-3 rounded-full ${getStatusColor(bin.status)}`}></div>
+                    <div className={`h-4 w-4 rounded-full ${getStatusColor(bin.status)}`}></div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium">{bin.id}</p>
-                          <p className="text-sm text-gray-600">{bin.location}</p>
+                          <p className="font-medium text-base">{bin.id}</p>
+                          <p className="text-base text-gray-600">{bin.location}</p>
                         </div>
                         <div className="flex items-center gap-4">
                           <div className="text-right">
-                            <p className="text-sm text-gray-600">Odor Level</p>
-                            <p className="text-sm font-medium">{bin.odorLevel}</p>
+                            <p className="text-base text-gray-600">Odor Level</p>
+                            <p className="text-base font-medium">{bin.odorLevel}</p>
                           </div>
                           {getStatusBadge(bin.status)}
                         </div>
                       </div>
                       <div className="mt-2">
-                        <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center justify-between text-base">
                           <span>Fill Level</span>
                           <span className="font-medium">{Math.round(bin.fillLevel)}%</span>
                         </div>

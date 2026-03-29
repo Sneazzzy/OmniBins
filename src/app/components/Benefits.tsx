@@ -90,9 +90,6 @@ export function Benefits() {
                     <div className="inline-flex rounded-2xl bg-gradient-to-br from-green-400/40 to-green-600/30 p-4 ring-2 ring-white/20 group-hover:ring-white/40 group-hover:scale-110 transition-all duration-300">
                       <benefit.icon className="h-8 w-8 text-white font-bold" />
                     </div>
-                    <div className="text-right">
-                      <div className="text-4xl font-bold text-white group-hover:scale-110 transition-transform duration-300">{benefit.stat}</div>
-                    </div>
                   </div>
                   
                   <h3 className="mb-4 text-2xl font-bold text-white tracking-tight group-hover:text-green-100 transition-colors duration-300">
@@ -103,8 +100,9 @@ export function Benefits() {
                     {benefit.description}
                   </p>
                   
-                  <div className="border-t border-white/20 pt-6">
+                  <div className="border-t border-white/20 pt-6 flex items-end justify-between">
                     <div className="text-sm font-semibold text-green-100">{benefit.statLabel}</div>
+                    <div className="text-2xl font-bold text-white">{benefit.stat}</div>
                   </div>
                 </div>
               </div>

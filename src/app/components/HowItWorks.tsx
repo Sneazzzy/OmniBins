@@ -39,10 +39,10 @@ export function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             How OMNIBINS Works
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-xl text-gray-600">
             A seamless integration of IoT technology and smart waste management
           </p>
         </motion.div>
@@ -66,8 +66,8 @@ export function HowItWorks() {
                   <step.icon className="h-8 w-8 text-white" />
                 </div>
                 
-                <h3 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <h3 className="mb-2 text-2xl font-semibold text-gray-900">{step.title}</h3>
+                <p className="text-lg text-gray-600">{step.description}</p>
               </div>
             </motion.div>
           ))}
