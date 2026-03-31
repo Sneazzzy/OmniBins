@@ -63,7 +63,7 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
         }`}
       >
         {/* Logo */}
-        <div className="flex h-16 items-center gap-2 border-b px-6">
+        <div className="flex h-16 items-center gap-2 px-6">
           <Link
             to="/"
             onClick={() => setSidebarOpen(false)}
@@ -130,7 +130,7 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
       {/* Main content */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-gray-50 px-6">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 bg-gray-50 px-6">
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden"
