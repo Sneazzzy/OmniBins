@@ -50,8 +50,8 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginModalProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} transition={{ duration: 0.2 }} className="relative w-full max-w-md bg-gray-50 rounded-2xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-              <button onClick={onClose} className="absolute right-4 top-4 rounded-full p-2 bg-white text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors shadow-md border border-gray-200">
-                <X className="h-6 w-6" />
+              <button onClick={onClose} className="absolute right-4 top-4 rounded-full p-2 bg-white text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors shadow-md border border-gray-200 cursor-pointer">
+                <X className="h-6 w-6 " />
               </button>
               <div className="bg-green-600 px-8 py-12 text-center">
                 <h2 className="text-3xl font-bold text-white">Welcome Back</h2>
@@ -66,7 +66,7 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginModalProps) {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="password" className="block text-base font-medium text-gray-700">Password</label>
+                  <label htmlFor="password" className="block text-base font-medium text-gray-700 ">Password</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="pl-10" required />
@@ -75,11 +75,11 @@ function LoginModal({ isOpen, onClose, onLoginSuccess }: LoginModalProps) {
                 <div className="flex items-center justify-between text-base">
                   <label className="flex items-center gap-2">
                     <input type="checkbox" className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-600" />
-                    <span className="text-gray-600">Remember me</span>
+                    <span className="text-gray-600 ">Remember me</span>
                   </label>
-                  <a href="#" className="text-green-600 hover:text-green-700 font-medium">Forgot password?</a>
+                  <a href="#" className="text-green-600 hover:text-green-700 font-medium cursor-pointer">Forgot password?</a>
                 </div>
-                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">Sign In</Button>
+                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white cursor-pointer">Sign In</Button>
               </form>
             </motion.div>
           </div>
@@ -103,12 +103,12 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
   return (
     <nav className="sticky top-0 z-50 bg-gray-50/80 backdrop-blur-md shadow-sm">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <button onClick={handleLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div className="rounded-lg bg-green-600 p-2">
+        <div className="flex h-16 items-center justify-between ">
+          <button onClick={handleLogoClick} className="flex items-center gap-2 cursor-pointer">
+            <div className="rounded-lg bg-green-600 p-2 hover:box-shadow-gray-600 ">
               <Trash2 className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">OMNIBINS</span>
+            <span className="text-xl font-bold text-gray-900 hover:text-box-shadow-gray-600 ">OMNIBINS</span>
           </button>
 
           <div className="hidden md:flex md:items-center md:gap-8">
@@ -116,8 +116,8 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
             <a href="#dashboard" className="text-gray-700 hover:text-green-600 transition-colors">Dashboard</a>
             <a href="#how-it-works" className="text-gray-700 hover:text-green-600 transition-colors">How It Works</a>
             <a href="#benefits" className="text-gray-700 hover:text-green-600 transition-colors">Benefits</a>
-            <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={onContactClick}>Contact Us</Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={onLoginClick}>Login</Button>
+            <Button className="bg-green-600 hover:bg-green-700 text-white cursor-pointer" onClick={onContactClick}>Contact Us</Button>
+            <Button className="bg-green-600 hover:bg-green-700 text-white cursor-pointer" onClick={onLoginClick}>Login</Button>
           </div>
 
           <div className="md:hidden">
@@ -168,9 +168,9 @@ function HeroSection({ onLoginClick }: { onLoginClick: () => void }) {
           <p className="mb-4 text-xl text-gray-900 sm:text-2xl">IoT-Based Smart Waste Management System</p>
           <p className="mb-10 text-lg text-gray-900">Real-Time Load Sensing & Odor-Triggered Neutralization</p>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white" onClick={onLoginClick}>Get Started</Button>
-            <Button size="lg" variant="outline" onClick={() => alert('Demo video coming soon!')}>Watch Demo</Button>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center ">
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white cursor-pointer" onClick={onLoginClick}>Get Started</Button>
+            <Button size="lg" variant="outline"className="cursor-pointer" onClick={() => alert('Demo video coming soon!')}>Watch Demo</Button>
           </div>
         </motion.div>
 
@@ -573,7 +573,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
             >
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                className="absolute right-4 top-4 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -639,4 +639,6 @@ export function LandingPage({ onLoginSuccess }: LandingPageProps) {
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
   );
+
+
 }

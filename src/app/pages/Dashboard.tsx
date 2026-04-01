@@ -75,6 +75,12 @@ export function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Stats Overview */}
+       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
+          <p className="text-gray-900 font-semibold">Live monitoring of bin status, gas levels & collection tracking</p>
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { title: 'Total Smart Bins', value: stats.totalBins, desc: 'Deployed across the area', icon: Trash2, iconColor: 'text-green-600' },

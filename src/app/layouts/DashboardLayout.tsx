@@ -45,9 +45,16 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
     }
     return location.pathname.startsWith(href);
   };
-
+<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Smart Bin Monitoring</h2>
+          <p className="text-gray-900 font-semibold">Real-time monitoring of all smart bins</p>
+        </div>
+      </div>
   return (
+    
     <div className="min-h-screen bg-white">
+      
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div
@@ -128,19 +135,10 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
       </aside>
 
       {/* Main content */}
+      
       <div className="lg:pl-64">
-        {/* Top bar */}
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 bg-gray-50 px-6">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="lg:hidden"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-          <h1 className="text-xl font-semibold text-gray-900">
-            {navigation.find(item => isActive(item.href))?.name || 'Dashboard'}
-          </h1>
-        </header>
+        {/* Top bar */} 
+
 
         {/* Page content */}
         <main className="p-6">
