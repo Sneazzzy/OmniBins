@@ -14,9 +14,11 @@ import {
   Menu,
   X,
   LogOut,
-  User
+  User,
+  Edit2
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { ProfileModal, UserData } from '../components/ProfileModal';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -31,12 +33,26 @@ const navigation = [
   { name: 'User Management', href: '/users', icon: Settings },
 ];
 
+
+
 interface DashboardLayoutProps {
   onLogout: () => void;
 }
 
 export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [userData, setUserData] = useState<UserData>({
+    id: 1,
+    name: 'Admin User',
+    email: 'admin@omnibins.com',
+    phone: '+1 (555) 123-4567',
+    role: 'admin',
+    department: 'Administration',
+    joinedDate: 'January 2024',
+    status: 'active',
+    lastLogin: 'Just now'
+  });
   const location = useLocation();
 
   const isActive = (href: string) => {
@@ -44,6 +60,10 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
       return location.pathname === '/';
     }
     return location.pathname.startsWith(href);
+  };
+
+  const handleUpdateUserData = (updatedData: UserData) => {
+    setUserData(updatedData);
   };
 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -114,18 +134,22 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
 
         {/* User section */}
         <div className="border-t p-4">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600">
+          <button
+            onClick={() => setIsProfileModalOpen(true)}
+            className="w-full flex items-center gap-3 mb-3 hover:bg-gray-100 p-2 rounded-lg transition-colors cursor-pointer"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600 flex-shrink-0">
               <User className="h-5 w-5 text-white" />
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p className="text-xs text-gray-500 truncate">admin@omnibins.com</p>
+            <div className="flex-1 min-w-0 text-left">
+              <p className="text-sm font-medium text-gray-900 truncate">{userData.name}</p>
+              <p className="text-xs text-gray-500 truncate">{userData.email}</p>
             </div>
-          </div>
+            <Edit2 className="h-4 w-4 text-gray-400" />
+          </button>
           <Button
             variant="outline"
-            className="w-full justify-start gap-2"
+            className="w-full justify-start gap-2 cursor-pointer"
             onClick={onLogout}
           >
             <LogOut className="h-4 w-4" />
@@ -133,6 +157,14 @@ export function DashboardLayout({ onLogout }: DashboardLayoutProps) {
           </Button>
         </div>
       </aside>
+
+      {/* Profile Modal */}
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
+        userData={userData}
+        onUpdateUserData={handleUpdateUserData}
+      />
 
       {/* Main content */}
       

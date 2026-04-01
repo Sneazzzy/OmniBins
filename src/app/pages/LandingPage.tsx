@@ -134,8 +134,8 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
                 {item.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
               </a>
             ))}
-            <Button className="w-full bg-green-600 hover:bg-green-700 text-white" onClick={onContactClick}>Contact Us</Button>
-            <Button className="w-full bg-green-600 hover:bg-green-700 text-white" onClick={onLoginClick}>Login</Button>
+            <Button className="w-full bg-green-600 hover:bg-green-700 text-white cursor-pointer" onClick={onContactClick}>Contact Us</Button>
+            <Button className="w-full bg-green-600 hover:bg-green-700 text-white cursor-pointer" onClick={onLoginClick}>Login</Button>
           </div>
         )}
       </div>
@@ -449,24 +449,22 @@ function BenefitsSection() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
           {benefits.map((benefit, index) => (
             <motion.div key={benefit.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} className="group">
-              <div className="relative h-full rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md border border-white/30 group-hover:border-white/50 transition-all duration-300"></div>
+              <div className="relative h-full rounded-2xl bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-md border border-white/30 group-hover:border-white/50 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                 
                 <div className="relative p-10 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-8">
-                    <div className="inline-flex rounded-2xl bg-gradient-to-br from-green-400/40 to-green-600/30 p-4 ring-2 ring-white/20 group-hover:ring-white/40 group-hover:scale-110 transition-all duration-300">
-                      <benefit.icon className="h-8 w-8 text-white font-bold" />
+                    <div className="inline-flex rounded-3xl bg-gradient-to-br from-green-400/40 to-green-600/30 p-4 ring-2 ring-white/20 group-hover:ring-white/40 group-hover:scale-110 transition-all duration-300">
+                      <benefit.icon className="h-12 w-12 text-white font-bold" />
                     </div>
-                    <div className="text-right">
-                      <div className="text-4xl font-bold text-white group-hover:scale-110 transition-transform duration-300">{benefit.stat}</div>
-                    </div>
+                    
                   </div>
                   
                   <h3 className="mb-4 text-2xl font-bold text-white tracking-tight group-hover:text-green-100 transition-colors duration-300">{benefit.title}</h3>
-                  <p className="mb-8 text-green-50 leading-relaxed flex-grow font-medium">{benefit.description}</p>
-                  <div className="border-t border-white/20 pt-6">
+                  <p className="mb-4 text-green-50 leading-relaxed flex-grow font-medium">{benefit.description}</p>
+                  <div className="inline-flex items-end justify-between border-t border-white/20 pt-2">
                     <div className="text-sm font-semibold text-green-100">{benefit.statLabel}</div>
+                    <div className="text-3xl font-bold text-white group-hover:scale-110 transition-transform duration-300 ">{benefit.stat}</div>
                   </div>
                 </div>
               </div>

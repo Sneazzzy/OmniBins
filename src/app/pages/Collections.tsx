@@ -156,13 +156,13 @@ export function Collections() {
                   </div>
                   <div className="flex gap-2">
                     {task.status === 'pending' && teams.map(team => (
-                      <Button key={team} size="sm" onClick={() => assignTeam(task.id, team)} className="bg-green-600 hover:bg-green-700 text-white">
+                      <Button key={team} size="sm" onClick={() => assignTeam(task.id, team)} className="bg-green-600 hover:bg-green-700 text-white cursor-pointer">
                         <Truck className="h-4 w-4 mr-2" />
                         {team}
                       </Button>
                     ))}
                     {task.status === 'in-progress' && (
-                      <Button size="sm" onClick={() => completeTask(task.id)} className="bg-green-600 hover:bg-green-700 text-white">
+                      <Button size="sm" onClick={() => completeTask(task.id)} className="bg-green-600 hover:bg-green-700 text-white cursor-pointer">
                         <CheckCircle className="h-4 w-4 mr-2" />
                         Mark Complete
                       </Button>

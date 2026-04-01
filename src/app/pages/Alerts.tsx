@@ -106,8 +106,8 @@ export function Alerts() {
                 <p className="text-base text-gray-700 mt-1">{alert?.message}</p>
               </div>
               <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
-                <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white">Dismiss</Button>
+                <Button type="button" variant="outline" onClick={onClose} className="flex-1 cursor-pointer">Cancel</Button>
+                <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white cursor-pointer">Dismiss</Button>
               </div>
             </motion.div>
           </div>
@@ -190,7 +190,7 @@ export function Alerts() {
                           <Button
                             size="sm"
                             onClick={() => markAsRead(alert.id)}
-                            className="bg-green-600 hover:bg-green-700 text-white"
+                            className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
                           >
                             <CheckCircle className="h-3 w-3 mr-1" />
                             Mark as read
@@ -202,7 +202,7 @@ export function Alerts() {
                             setAlertToConfirm(alert);
                             setIsConfirmOpen(true);
                           }}
-                          className="bg-red-600 hover:bg-red-700 text-white"
+                          className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
                         >
                           <XCircle className="h-3 w-3 mr-1" />
                           Dismiss

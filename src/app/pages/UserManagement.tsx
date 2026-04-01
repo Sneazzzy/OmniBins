@@ -11,18 +11,19 @@ import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Shield, User, Users, Settings, X, Search } from 'lucide-react';
+import { Label } from '../components/ui/label';
+import { Shield, User, Users, Settings, X, Search, Edit2, Save, Mail, Phone, Calendar, Trash2, Upload, Clock } from 'lucide-react';
 
 // ============================================================================
 // DATA & CONSTANTS
 // ============================================================================
-const users = [
-  { id: 1, name: 'Admin User', email: 'admin@omnibins.com', role: 'admin', status: 'active', lastLogin: '2 hours ago' },
-  { id: 2, name: 'LGU Staff 1', email: 'staff1@omnibins.com', role: 'staff', status: 'active', lastLogin: '5 hours ago' },
-  { id: 3, name: 'LGU Staff 2', email: 'staff2@omnibins.com', role: 'staff', status: 'active', lastLogin: '1 day ago' },
-  { id: 4, name: 'Worker Manager', email: 'manager@omnibins.com', role: 'manager', status: 'active', lastLogin: '3 hours ago' },
-  { id: 5, name: 'Analyst', email: 'analyst@omnibins.com', role: 'analyst', status: 'active', lastLogin: '6 hours ago' },
-  { id: 6, name: 'Inactive User', email: 'inactive@omnibins.com', role: 'staff', status: 'inactive', lastLogin: '30 days ago' },
+const users: UserData[] = [
+  { id: 1, name: 'Admin User', email: 'admin@omnibins.com', role: 'admin', status: 'active', lastLogin: '2 hours ago', phone: '+1 (555) 123-4567', department: 'Administration', joinedDate: 'January 2024', avatar: undefined },
+  { id: 2, name: 'LGU Staff 1', email: 'staff1@omnibins.com', role: 'staff', status: 'active', lastLogin: '5 hours ago', phone: '+1 (555) 234-5678', department: 'Operations', joinedDate: 'February 2024', avatar: undefined },
+  { id: 3, name: 'LGU Staff 2', email: 'staff2@omnibins.com', role: 'staff', status: 'active', lastLogin: '1 day ago', phone: '+1 (555) 345-6789', department: 'Operations', joinedDate: 'March 2024', avatar: undefined },
+  { id: 4, name: 'Worker Manager', email: 'manager@omnibins.com', role: 'manager', status: 'active', lastLogin: '3 hours ago', phone: '+1 (555) 456-7890', department: 'Management', joinedDate: 'January 2024', avatar: undefined },
+  { id: 5, name: 'Analyst', email: 'analyst@omnibins.com', role: 'analyst', status: 'active', lastLogin: '6 hours ago', phone: '+1 (555) 567-8901', department: 'Analytics', joinedDate: 'April 2024', avatar: undefined },
+  { id: 6, name: 'Inactive User', email: 'inactive@omnibins.com', role: 'staff', status: 'inactive', lastLogin: '30 days ago', phone: '+1 (555) 678-9012', department: 'Operations', joinedDate: 'May 2024', avatar: undefined },
 ];
 
 // ============================================================================
@@ -105,8 +106,8 @@ function AddUserModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                   </div>
                 )}
                 <div className="flex gap-3 pt-4">
-                  <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
-                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">Add</Button>
+                  <Button type="button" variant="outline" onClick={onClose} className="flex-1 cursor-pointer">Cancel</Button>
+                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer">Add</Button>
                 </div>
               </form>
             </motion.div>
@@ -117,74 +118,271 @@ function AddUserModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 }
 
-function EditUserModal({ isOpen, onClose, user }: { isOpen: boolean; onClose: () => void; user?: any }) {
-  const [formData, setFormData] = useState({ name: user?.name || '', email: user?.email || '', role: user?.role || 'staff' });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`User Updated:\n${formData.name}\n${formData.email}\nRole: ${formData.role}`);
-    onClose();
-  };
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-50 bg-white/30 backdrop-blur-sm" />
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6" onClick={(e) => e.stopPropagation()}>
-              <button onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"><X className="h-6 w-6" /></button>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Edit User</h2>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                  <Input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="John Doe" required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="john@omnibins.com" required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                  <select value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="staff">Staff</option>
-                    <option value="manager">Manager</option>
-                    <option value="analyst">Analyst</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-                <div className="flex gap-3 pt-4">
-                  <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
-                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white">Save Changes</Button>
-                </div>
-              </form>
-            </motion.div>
-          </div>
-        </>
-      )}
-    </AnimatePresence>
-  );
+interface UserData {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  department: string;
+  joinedDate: string;
+  status: string;
+  lastLogin: string;
+  avatar?: string;
 }
 
-function RemoveUserModal({ isOpen, onClose, userName }: { isOpen: boolean; onClose: () => void; userName?: string }) {
-  const handleConfirm = () => {
-    alert(`User "${userName}" has been removed from the system.`);
-    onClose();
+interface ProfileModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userData: UserData;
+  onUpdateUserData: (data: UserData) => void;
+  onRemoveUser: () => void;
+}
+
+function ProfileModal({ isOpen, onClose, userData, onUpdateUserData, onRemoveUser }: ProfileModalProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedData, setEditedData] = useState<UserData>(userData);
+
+  const handleSave = () => {
+    onUpdateUserData(editedData);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditedData(userData);
+    setIsEditing(false);
+  };
+
+  const handleRemove = () => {
+    if (confirm(`Are you sure you want to remove ${userData.name} from the system?`)) {
+      onRemoveUser();
+      onClose();
+    }
+  };
+
+  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditedData({ ...editedData, avatar: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-50 bg-white/30 backdrop-blur-sm" />
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            onClick={onClose} 
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6" onClick={(e) => e.stopPropagation()}>
-              <button onClick={onClose} className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"><X className="h-6 w-6" /></button>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Remove User</h2>
-              <p className="text-gray-700 mb-6">Are you sure you want to remove <span className="font-bold">{userName}</span> from the system? This action cannot be undone.</p>
-              <div className="flex gap-3">
-                <Button type="button" variant="outline" onClick={onClose} className="flex-1">Cancel</Button>
-                <Button type="button" onClick={handleConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white">Remove</Button>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.95, y: 20 }} 
+              transition={{ duration: 0.2 }} 
+              className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 overflow-hidden">
+                        {editedData.avatar ? (
+                          <img src={editedData.avatar} alt={editedData.name} className="h-full w-full object-cover" />
+                        ) : (
+                          <User className="h-10 w-10 text-white" />
+                        )}
+                      </div>
+                      {isEditing && (
+                        <label className="absolute bottom-0 right-0 h-6 w-6 bg-white rounded-full flex items-center justify-center cursor-pointer shadow-md hover:bg-gray-100 transition-colors">
+                          <Upload className="h-3 w-3 text-gray-700" />
+                          <input type="file" accept="image/*" onChange={handleAvatarUpload} className="hidden" />
+                        </label>
+                      )}
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">{isEditing ? 'Edit Profile' : 'User Profile'}</h2>
+                      <p className="text-green-100">{userData.role}</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={onClose} 
+                    className="rounded-full p-2 bg-white/20 text-white hover:bg-white/30 transition-colors"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <User className="h-4 w-4" />
+                      Full Name
+                    </Label>
+                    {isEditing ? (
+                      <Input
+                        value={editedData.name}
+                        onChange={(e) => setEditedData({ ...editedData, name: e.target.value })}
+                        className="border-gray-300"
+                      />
+                    ) : (
+                      <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.name}</p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Mail className="h-4 w-4" />
+                      Email Address
+                    </Label>
+                    {isEditing ? (
+                      <Input
+                        type="email"
+                        value={editedData.email}
+                        onChange={(e) => setEditedData({ ...editedData, email: e.target.value })}
+                        className="border-gray-300"
+                      />
+                    ) : (
+                      <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.email}</p>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Phone className="h-4 w-4" />
+                      Phone Number
+                    </Label>
+                    {isEditing ? (
+                      <Input
+                        value={editedData.phone}
+                        onChange={(e) => setEditedData({ ...editedData, phone: e.target.value })}
+                        className="border-gray-300"
+                      />
+                    ) : (
+                      <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.phone}</p>
+                    )}
+                  </div>
+
+                  {/* Department */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Users className="h-4 w-4" />
+                      Department
+                    </Label>
+                    {isEditing ? (
+                      <select
+                        value={editedData.department}
+                        onChange={(e) => setEditedData({ ...editedData, department: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                      >
+                        <option value="Administration">Administration</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Management">Management</option>
+                        <option value="Analytics">Analytics</option>
+                        <option value="Maintenance">Maintenance</option>
+                      </select>
+                    ) : (
+                      <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.department}</p>
+                    )}
+                  </div>
+
+                  {/* Role */}
+                  <div className="space-y-2 md:col-span-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Settings className="h-4 w-4" />
+                      Role
+                    </Label>
+                    {isEditing ? (
+                      <select
+                        value={editedData.role}
+                        onChange={(e) => setEditedData({ ...editedData, role: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                      >
+                        <option value="staff">Staff</option>
+                        <option value="manager">Manager</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    ) : (
+                      <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.role}</p>
+                    )}
+                  </div>
+
+                  {/* Joined Date */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Calendar className="h-4 w-4" />
+                      Member Since
+                    </Label>
+                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.joinedDate}</p>
+                  </div>
+
+                  {/* Last Login */}
+                  <div className="space-y-2 md:col-span-2">
+                    <Label className="flex items-center gap-2 text-gray-700">
+                      <Clock className="h-4 w-4" />
+                      Last Login
+                    </Label>
+                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.lastLogin}</p>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 mt-8 pt-6 border-t">
+                  {isEditing ? (
+                    <>
+                      <Button
+                        onClick={handleSave}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+                      >
+                        <Save className="h-4 w-4 mr-2" />
+                        Save Changes
+                      </Button>
+                      <Button
+                        onClick={handleCancel}
+                        variant="outline"
+                        className="flex-1 cursor-pointer"
+                      >
+                        Cancel
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        onClick={() => setIsEditing(true)}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+                      >
+                        <Edit2 className="h-4 w-4 mr-2" />
+                        Edit Profile
+                      </Button>
+                      {userData.role !== 'admin' && (
+                        <Button
+                          onClick={handleRemove}
+                          className="flex-1 bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+                        >
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Remove User
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -195,24 +393,31 @@ function RemoveUserModal({ isOpen, onClose, userName }: { isOpen: boolean; onClo
 }
 
 
-
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
 export function UserManagement() {
-  const [userList] = useState(users);
+  const [userList, setUserList] = useState(users);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [editingUser, setEditingUser] = useState<any>(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [removeUser, setRemoveUser] = useState<any>(null);
-  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const filteredUsers = userList.filter(user =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.role.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleUpdateUserData = (updatedData: UserData) => {
+    setUserList(userList.map(user => user.id === updatedData.id ? updatedData : user));
+  };
+
+  const handleRemoveUser = () => {
+    if (selectedUser) {
+      setUserList(userList.filter(user => user.id !== selectedUser.id));
+    }
+  };
 
   const getRoleBadge = (role: string) => {
     switch (role) {
@@ -347,26 +552,20 @@ export function UserManagement() {
                   <Button 
                     size="sm" 
                     onClick={() => {
-                      setEditingUser(user);
-                      setIsEditModalOpen(true);
+                      setSelectedUser({
+                        ...user,
+                        phone: user.phone || 'N/A',
+                        department: user.department || 'Operations',
+                        joinedDate: user.joinedDate || 'January 2024',
+                        avatar: user.avatar
+                      });
+                      setIsProfileModalOpen(true);
                     }}
-                    className="bg-green-600 hover:bg-green-700 text-white"
+                    className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
                   >
-                    <Settings className="h-4 w-4 mr-2" />
-                    Edit
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
                   </Button>
-                  {user.role !== 'admin' && (
-                    <Button 
-                      size="sm" 
-                      onClick={() => {
-                        setRemoveUser(user);
-                        setIsRemoveModalOpen(true);
-                      }}
-                      className="bg-red-600 hover:bg-red-700 text-white"
-                    >
-                      Remove
-                    </Button>
-                  )}
                 </div>
               </div>
             </CardContent>
@@ -375,8 +574,15 @@ export function UserManagement() {
       </div>
 
       <AddUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <EditUserModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} user={editingUser} />
-      <RemoveUserModal isOpen={isRemoveModalOpen} onClose={() => setIsRemoveModalOpen(false)} userName={removeUser?.name} />
+      {selectedUser && (
+        <ProfileModal
+          isOpen={isProfileModalOpen}
+          onClose={() => setIsProfileModalOpen(false)}
+          userData={selectedUser}
+          onUpdateUserData={handleUpdateUserData}
+          onRemoveUser={handleRemoveUser}
+        />
+      )}
     </div>
   );
 }

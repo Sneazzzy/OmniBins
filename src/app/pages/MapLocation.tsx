@@ -135,7 +135,7 @@ export function MapLocation() {
                   </div>
                 </div>
 
-                <button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+                <button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 cursor-pointer">
                   <Navigation className="h-4 w-4" />
                   Get Directions
                 </button>

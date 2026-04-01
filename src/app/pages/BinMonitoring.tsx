@@ -172,10 +172,10 @@ function ConfirmationModal({ isOpen, onClose, onConfirm, title, message }: { isO
             <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
             <p className="text-gray-700 mb-6">{message}</p>
             <div className="flex gap-3">
-              <Button type="button" variant="outline" onClick={onClose} className="flex-1 text-sm">
+              <Button type="button" variant="outline" onClick={onClose} className="flex-1 text-sm cursor-pointer">
                 Cancel
               </Button>
-              <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm">
+              <Button type="button" onClick={onConfirm} className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer">
                 Confirm
               </Button>
             </div>
@@ -274,12 +274,12 @@ export function BinMonitoring() {
       </div>
 
       {/* Filter buttons */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 cursor">
         {['all', 'Normal', 'Near Full', 'Full', 'High Gas Level'].map((status) => (
           <button
             key={status}
             onClick={() => setFilterStatus(status)}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+            className= {`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
               filterStatus === status
                 ? 'bg-green-600 text-white'
                 : 'bg-gray-50 text-gray-900 border border-gray-800 hover:bg-gray-100'
