@@ -149,7 +149,7 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
 
 function HeroSection({ onLoginClick }: { onLoginClick: () => void }) {
   return (
-    <div className="relative overflow-hidden bg-gray-50 py-24 sm:py-32">
+    <div className="relative overflow-hidden bg-gray-50 py-24 sm:py-50">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mx-auto max-w-3xl text-center">
           <div className="mb-8 flex justify-center gap-4">
