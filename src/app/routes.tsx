@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { Dashboard } from "./pages/Dashboard";
 
-// Lazy load route components for code splitting
+// Lazy load non-critical route components for code splitting
 const BinMonitoring = lazy(() => import("./pages/BinMonitoring").then(m => ({ default: m.BinMonitoring })));
 const MapLocation = lazy(() => import("./pages/MapLocation").then(m => ({ default: m.MapLocation })));
 const Alerts = lazy(() => import("./pages/Alerts").then(m => ({ default: m.Alerts })));

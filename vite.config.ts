@@ -3,6 +3,11 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+import { defineConfig } from 'vite'
+import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+
 export default defineConfig({
   base: '/',
   plugins: [
@@ -32,7 +37,6 @@ export default defineConfig({
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-hover-card',
             '@radix-ui/react-label',
-            '@radix-ui/react-navigation-menu',
             '@radix-ui/react-popover',
             '@radix-ui/react-progress',
             '@radix-ui/react-radio-group',
