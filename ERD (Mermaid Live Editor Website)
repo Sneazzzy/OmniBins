@@ -1,0 +1,103 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+    direction TB
+
+    USER {
+        int id PK
+        string name
+        string email
+        string phone
+        string role
+        string department
+        date joined_date
+        string status
+        timestamp last_login
+        string avatar
+    }
+
+    WORKER {
+        int id PK
+        int user_id FK
+        string name
+        string team
+        string phone
+        string email
+        int tasks_today
+        int tasks_completed
+        string status
+    }
+
+    COLLECTION {
+        int id PK
+        varchar bin_id FK
+        int worker_id FK
+        string location
+        string priority
+        string status
+        decimal capacity_percent
+        timestamp scheduled_time
+        timestamp completed_at
+    }
+
+    BIN {
+        varchar id PK
+        string location
+        decimal weight_kg
+        decimal capacity_percent
+        decimal nh3_ppm
+        decimal ch4_ppm
+        string status
+    }
+
+    ALERT {
+        int id PK
+        varchar bin_id FK
+        string type
+        text message
+        timestamp created_at
+        string severity
+        boolean is_read
+    }
+
+    ROT_INDEX {
+        int id PK
+        varchar bin_id FK
+        timestamp recorded_at
+        decimal nh3_level
+        decimal ch4_level
+        decimal rot_index_value
+        string area
+    }
+
+    LOCATION {
+        varchar bin_id PK "FK"
+        string address
+        decimal latitude
+        decimal longitude
+        string status
+        decimal capacity
+        timestamp last_collection
+    }
+
+    MAINTENANCE {
+        varchar bin_id PK "FK"
+        string sensors_status
+        decimal battery_level
+        string connectivity
+        timestamp last_maintenance
+        string status
+        date scheduled_date
+    }
+
+    %% Relationships (refined crows-foot notation)
+    USER ||--o{ WORKER : "manages"
+    USER ||--o{ COLLECTION : "creates"
+    WORKER ||--o{ COLLECTION : "performs"
+    BIN ||--o{ COLLECTION : "requires"
+    BIN ||--o{ ALERT : "triggers"
+    BIN ||--o{ ROT_INDEX : "logs"
+    BIN ||--|| LOCATION : "located at"
+    BIN ||--|| MAINTENANCE : "maintained by"
