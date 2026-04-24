@@ -23,7 +23,7 @@ export function Navbar({ onLoginSuccess }: NavbarProps) {
   return (
     <>
       <nav className="sticky top-0 z-50 bg-gray-50/80 backdrop-blur-md border-none">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <button onClick={handleLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <div className="rounded-lg bg-green-600 p-2">

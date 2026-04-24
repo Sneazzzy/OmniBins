@@ -102,8 +102,8 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
 
   return (
     <nav className="sticky top-0 z-50 bg-gray-50/40 backdrop-blur-md shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between ">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           <button onClick={handleLogoClick} className="flex items-center gap-2 cursor-pointer">
             <div className="rounded-lg bg-green-600 p-2 hover:box-shadow-gray-600 ">
               <Trash2 className="h-6 w-6 text-white" />
@@ -150,7 +150,7 @@ function NavBar({ onLoginClick, onContactClick }: { onLoginClick: () => void; on
 function HeroSection({ onLoginClick }: { onLoginClick: () => void }) {
   return (
     <div className="relative overflow-hidden bg-cover bg-center py-24 sm:py-50" 
-    style={{ backgroundImage: "url('/world.jpg')" }}>
+    style={{ backgroundImage: "url('/BgImage.png')" }}>
       <div className="absolute inset-0 bg-slate-950/30" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mx-auto max-w-3xl text-center">

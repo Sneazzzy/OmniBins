@@ -7,7 +7,6 @@ import { Dashboard } from "./pages/Dashboard";
 const BinMonitoring = lazy(() => import("./pages/BinMonitoring").then(m => ({ default: m.BinMonitoring })));
 const MapLocation = lazy(() => import("./pages/MapLocation").then(m => ({ default: m.MapLocation })));
 const Alerts = lazy(() => import("./pages/Alerts").then(m => ({ default: m.Alerts })));
-const Collections = lazy(() => import("./pages/Collections").then(m => ({ default: m.Collections })));
 const RotIndex = lazy(() => import("./pages/RotIndex").then(m => ({ default: m.RotIndex })));
 const Analytics = lazy(() => import("./pages/Analytics").then(m => ({ default: m.Analytics })));
 const Workers = lazy(() => import("./pages/Workers").then(m => ({ default: m.Workers })));
@@ -31,7 +30,7 @@ export function createAppRouter(onLogout: () => void) {
         { path: "bins", element: <Suspense fallback={<LoadingFallback />}><BinMonitoring /></Suspense> },
         { path: "map", element: <Suspense fallback={<LoadingFallback />}><MapLocation /></Suspense> },
         { path: "alerts", element: <Suspense fallback={<LoadingFallback />}><Alerts /></Suspense> },
-        { path: "collections", element: <Suspense fallback={<LoadingFallback />}><Collections /></Suspense> },
+        { path: "collections", element: <Suspense fallback={<LoadingFallback />}><BinMonitoring /></Suspense> },
         { path: "rot-index", element: <Suspense fallback={<LoadingFallback />}><RotIndex /></Suspense> },
         { path: "analytics", element: <Suspense fallback={<LoadingFallback />}><Analytics /></Suspense> },
         { path: "workers", element: <Suspense fallback={<LoadingFallback />}><Workers /></Suspense> },
