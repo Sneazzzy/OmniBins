@@ -18,12 +18,12 @@ import { Shield, User, Users, Settings, X, Search, Edit2, Save, Mail, Phone, Cal
 // DATA & CONSTANTS
 // ============================================================================
 const users: UserData[] = [
-  { id: 1, name: 'Admin User', email: 'admin@omnibins.com', role: 'admin', status: 'active', lastLogin: '2 hours ago', phone: '+1 (555) 123-4567', department: 'Administration', joinedDate: 'January 2024', avatar: undefined },
-  { id: 2, name: 'LGU Staff 1', email: 'staff1@omnibins.com', role: 'staff', status: 'active', lastLogin: '5 hours ago', phone: '+1 (555) 234-5678', department: 'Operations', joinedDate: 'February 2024', avatar: undefined },
-  { id: 3, name: 'LGU Staff 2', email: 'staff2@omnibins.com', role: 'staff', status: 'active', lastLogin: '1 day ago', phone: '+1 (555) 345-6789', department: 'Operations', joinedDate: 'March 2024', avatar: undefined },
-  { id: 4, name: 'Worker Manager', email: 'manager@omnibins.com', role: 'manager', status: 'active', lastLogin: '3 hours ago', phone: '+1 (555) 456-7890', department: 'Management', joinedDate: 'January 2024', avatar: undefined },
-  { id: 5, name: 'Analyst', email: 'analyst@omnibins.com', role: 'analyst', status: 'active', lastLogin: '6 hours ago', phone: '+1 (555) 567-8901', department: 'Analytics', joinedDate: 'April 2024', avatar: undefined },
-  { id: 6, name: 'Inactive User', email: 'inactive@omnibins.com', role: 'staff', status: 'inactive', lastLogin: '30 days ago', phone: '+1 (555) 678-9012', department: 'Operations', joinedDate: 'May 2024', avatar: undefined },
+  { id: 1, name: 'Admin User', email: 'admin@omnibins.com', role: 'admin', status: 'active', last_login: '2 hours ago', phone: '+1 (555) 123-4567', department: 'Administration', joined_date: 'January 2024', avatar: undefined },
+  { id: 2, name: 'LGU Staff 1', email: 'staff1@omnibins.com', role: 'staff', status: 'active', last_login: '5 hours ago', phone: '+1 (555) 234-5678', department: 'Operations', joined_date: 'February 2024', avatar: undefined },
+  { id: 3, name: 'LGU Staff 2', email: 'staff2@omnibins.com', role: 'staff', status: 'active', last_login: '1 day ago', phone: '+1 (555) 345-6789', department: 'Operations', joined_date: 'March 2024', avatar: undefined },
+  { id: 4, name: 'Worker Manager', email: 'manager@omnibins.com', role: 'manager', status: 'active', last_login: '3 hours ago', phone: '+1 (555) 456-7890', department: 'Management', joined_date: 'January 2024', avatar: undefined },
+  { id: 5, name: 'Analyst', email: 'analyst@omnibins.com', role: 'analyst', status: 'active', last_login: '6 hours ago', phone: '+1 (555) 567-8901', department: 'Analytics', joined_date: 'April 2024', avatar: undefined },
+  { id: 6, name: 'Inactive User', email: 'inactive@omnibins.com', role: 'staff', status: 'inactive', last_login: '30 days ago', phone: '+1 (555) 678-9012', department: 'Operations', joined_date: 'May 2024', avatar: undefined },
 ];
 
 // ============================================================================
@@ -125,9 +125,9 @@ interface UserData {
   phone: string;
   role: string;
   department: string;
-  joinedDate: string;
+  joined_date: string;
   status: string;
-  lastLogin: string;
+  last_login: string;
   avatar?: string;
 }
 
@@ -330,7 +330,7 @@ function ProfileModal({ isOpen, onClose, userData, onUpdateUserData, onRemoveUse
                       <Calendar className="h-4 w-4" />
                       Member Since
                     </Label>
-                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.joinedDate}</p>
+                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.joined_date}</p>
                   </div>
 
                   {/* Last Login */}
@@ -339,7 +339,7 @@ function ProfileModal({ isOpen, onClose, userData, onUpdateUserData, onRemoveUse
                       <Clock className="h-4 w-4" />
                       Last Login
                     </Label>
-                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.lastLogin}</p>
+                    <p className="text-gray-900 font-medium p-2 bg-gray-50 rounded-lg">{userData.last_login}</p>
                   </div>
                 </div>
 
@@ -545,7 +545,7 @@ export function UserManagement() {
                       )}
                     </div>
                     <p className="text-sm text-gray-900 font-medium">{user.email}</p>
-                    <p className="text-xs text-gray-800 font-medium mt-1">Last login: {user.lastLogin}</p>
+                    <p className="text-xs text-gray-800 font-medium mt-1">Last login: {user.last_login}</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -556,7 +556,7 @@ export function UserManagement() {
                         ...user,
                         phone: user.phone || 'N/A',
                         department: user.department || 'Operations',
-                        joinedDate: user.joinedDate || 'January 2024',
+                        joined_date: user.joined_date || 'January 2024',
                         avatar: user.avatar
                       });
                       setIsProfileModalOpen(true);
