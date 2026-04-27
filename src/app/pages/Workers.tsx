@@ -15,6 +15,12 @@ const workersData = [
   { id: 5, name: 'Jose Ramos', team: 'Team C', phone: '0921-567-8901', email: 'jose@omnibins.com', tasksToday: 0, tasksCompleted: 0, status: 'off-duty' },
 ];
 
+const reporterMessages = [
+  { id: 1, workerId: 1, message: "Missed garbage pickup at Zone 3", date: "2026-04-26" },
+  { id: 2, workerId: 2, message: "Overflowing bin near school", date: "2026-04-26" },
+  { id: 3, workerId: 1, message: "Late collection reported", date: "2026-04-25" },
+];
+
 interface CreateTeamModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -165,12 +171,55 @@ function CreateTeamModal({ isOpen, onClose, workers, onCreateTeam }: CreateTeamM
     </AnimatePresence>
   );
 }
+function ViewMessagesModal({ isOpen, onClose, messages }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/50"
+            onClick={onClose}
+          />
+
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-xl w-full max-w-xl p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl font-bold mb-4">Reporter Messages</h2>
+
+              <div className="space-y-3 max-h-80 overflow-y-auto">
+                {messages.length === 0 ? (
+                  <p className="text-gray-500">No messages found.</p>
+                ) : (
+                  messages.map(msg => (
+                    <div key={msg.id} className="p-3 border rounded-lg">
+                      <p>{msg.message}</p>
+                      <p className="text-xs text-gray-500">{msg.date}</p>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <Button onClick={onClose} className="mt-4 w-full">
+                Close
+              </Button>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
 
 export function Workers() {
   const [workerList, setWorkerList] = useState(workersData);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateTeamModalOpen, setIsCreateTeamModalOpen] = useState(false);
-
+  
   const filteredWorkers = workerList.filter(worker =>
     worker.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     worker.team.toLowerCase().includes(searchQuery.toLowerCase())
@@ -178,6 +227,8 @@ export function Workers() {
 
   const activeWorkers = workerList.filter(w => w.status === 'active').length;
   const totalTasks = workerList.reduce((sum, w) => sum + w.tasksCompleted, 0);
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [selectedMessages, setSelectedMessages] = useState<typeof reporterMessages>([]);
 
   const handleCreateTeam = (teamName: string, selectedWorkerIds: number[]) => {
     setWorkerList(workerList.map(worker =>
@@ -289,7 +340,17 @@ export function Workers() {
                   <span className="text-gray-600">Tasks Today</span>
                   <span className="font-bold">{worker.tasksCompleted} / {worker.tasksToday}</span>
                 </div>
-              </div>
+                <Button
+                onClick={() => {
+                  const msgs = reporterMessages.filter(m => m.workerId === worker.id);
+                  setSelectedMessages(msgs);
+                  setIsMessageModalOpen(true);
+                }}
+                className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                View Reports
+              </Button>
+              </div>  
             </CardContent>
           </Card>
         ))}
@@ -300,6 +361,11 @@ export function Workers() {
         onClose={() => setIsCreateTeamModalOpen(false)}
         workers={workerList}
         onCreateTeam={handleCreateTeam}
+      />
+      <ViewMessagesModal
+        isOpen={isMessageModalOpen}
+        onClose={() => setIsMessageModalOpen(false)}
+        messages={selectedMessages}
       />
     </div>
   );
